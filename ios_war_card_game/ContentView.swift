@@ -8,6 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    // @State property can be changed by the view and the update
+    // applied to the @State property is updated on the ui
+    @State var playerCard = 5
+    @State var cpuCard = 9
+    @State var playerScore = 0
+    @State var cpuScore = 0
+    
+    
     var body: some View {
         ZStack{
             Image("background").ignoresSafeArea()
@@ -19,14 +27,30 @@ struct ContentView: View {
                 Spacer()
                 HStack{
                     Spacer()
-                    Image("card2")
+                    Image("card\(playerCard)")
                     Spacer()
-                    Image("card3")
+                    Image("card\(cpuCard)")
                     Spacer()
                 }
                 
                 Spacer()
-                Image("dealbutton")
+                
+                Button {
+                    // Generate a random number between 2 and 14 and update both the player and cpu cards
+                    playerCard = Int.random(in: 2...14)
+                    cpuCard = Int.random(in: 2...14)
+                    
+                    // Update scores according to the generated score
+                    if playerCard > cpuCard{
+                        playerScore += 1
+                    } else if playerCard < cpuCard{
+                        cpuScore += 1
+                    }
+                    
+                } label: {
+                    Image("dealbutton")
+                }
+
                 Spacer()
                 
                 HStack{
@@ -36,7 +60,7 @@ struct ContentView: View {
                             .font(.headline)
                             .padding(.bottom, 10)
                             .foregroundColor(Color.white)
-                        Text("0")
+                        Text(String(playerScore))
                             .font(.largeTitle)
                             .foregroundColor(Color.white)
                     }
@@ -48,7 +72,7 @@ struct ContentView: View {
                             .font(.headline)
                             .padding(.bottom, 10)
                             .foregroundColor(Color.white)
-                        Text("0")
+                        Text(String(cpuScore))
                             .font(.largeTitle)
                             .foregroundColor(Color.white)
                     }
@@ -61,6 +85,8 @@ struct ContentView: View {
         }
     }
 }
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
