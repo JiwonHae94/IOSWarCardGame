@@ -10,10 +10,10 @@ import SwiftUI
 struct ContentView: View {
     // @State property can be changed by the view and the update
     // applied to the @State property is updated on the ui
-    @State var playerCard = 5
-    @State var cpuCard = 9
-    @State var playerScore = 0
-    @State var cpuScore = 0
+    @State private var playerCard = Int.random(in: 2...14)
+    @State private var cpuCard = Int.random(in: 2...14)
+    @State private var playerScore = 0
+    @State private var cpuScore = 0
     
     
     var body: some View {
